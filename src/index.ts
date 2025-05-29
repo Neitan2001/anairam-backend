@@ -3,6 +3,7 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
+import cors from 'cors';
 
 dotenv.config();
 const app = express();
@@ -12,6 +13,8 @@ const prisma = new PrismaClient();
 app.use(helmet());
 app.use(rateLimit({ windowMs: 15*60*1000, max: 100 }));
 app.use(express.json());
+
+app.use(cors());
 
 // Rotas
 app.get('/events', async (_req, res) => {
