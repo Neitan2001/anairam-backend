@@ -15,7 +15,9 @@ app.use(express.json());
 
 // Rotas
 app.get('/events', async (_req, res) => {
-  const events = await prisma.event.findMany();
+  const events = await prisma.event.findMany({
+    orderBy: { date: 'asc' }
+  });
   res.json(events);
 });
 
